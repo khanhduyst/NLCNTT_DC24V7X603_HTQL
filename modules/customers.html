@@ -1,0 +1,57 @@
+<div class="cus-container">
+    <div class="cus-header d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h3 class="cus-title">Quản Lý Khách Hàng</h3>
+            <span class="cus-subtitle text-muted">Lưu trữ thông tin và lịch sử giao dịch</span>
+        </div>
+        <div class="cus-actions">
+            <button class="btn btn-outline-secondary cus-btn-export me-2">
+                <i class="fas fa-file-export me-1"></i> Xuất Excel
+            </button>
+            <button class="btn btn-primary cus-btn-add">
+                <i class="fas fa-plus me-1"></i> Thêm khách hàng
+            </button>
+        </div>
+    </div>
+
+    <div class="card cus-card border-0 shadow-sm">
+        <div class="card-header bg-white py-3">
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <div class="input-group cus-search-box">
+                        <span class="input-group-text border-0 bg-light"><i class="fas fa-search text-muted"></i></span>
+                        <input type="text" class="form-control border-0 bg-light shadow-none"
+                            placeholder="Tìm tên, ID, quốc gia...">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body p-0">
+            <div id="cus-content-render">
+            </div>
+        </div>
+
+        <div class="card-footer bg-white py-3">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="cus-pagination-info small text-muted">
+                    Hiển thị <span class="fw-bold">1-10</span> / <span class="fw-bold">120</span> khách hàng
+                </div>
+                <nav id="cus-pagination"></nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="cus-detail-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow">
+            <div class="modal-header border-bottom-0 pb-0">
+                <h5 class="modal-title fw-bold text-dark" id="modal-title-text"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body pt-2" id="modal-content-data">
+            </div>
+        </div>
+    </div>
+</div>

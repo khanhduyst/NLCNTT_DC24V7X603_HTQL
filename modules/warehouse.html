@@ -1,0 +1,71 @@
+<div class="wh-container">
+    <div class="wh-header d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h3 class="wh-title text-dark fw-bold">Quản Lý Kho Hàng</h3>
+            <p class="wh-subtitle text-muted mb-0">Theo dõi tồn kho và luân chuyển hàng hóa</p>
+        </div>
+        <div class="wh-actions">
+            <button class="btn btn-outline-secondary wh-btn-export me-2">
+                <i class="fas fa-file-excel me-1"></i> Xuất file
+            </button>
+            <button class="btn btn-primary wh-btn-add">
+                <i class="fas fa-plus me-1"></i> Nhập hàng mới
+            </button>
+        </div>
+    </div>
+
+    <div class="card wh-card border-0 shadow-sm">
+        <div class="card-header bg-white py-3">
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <span class="input-group-text border-0 bg-light"><i class="fas fa-search text-muted"></i></span>
+                        <input type="text" class="form-control border-0 bg-light shadow-none"
+                            placeholder="Tìm tên SP, SKU...">
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <select class="form-select border-0 bg-light shadow-none">
+                        <option value="">Tất cả danh mục</option>
+                        <option value="Laptop">Laptop</option>
+                        <option value="Điện thoại">Điện thoại</option>
+                        <option value="Máy tính bảng">Máy tính bảng</option>
+                        <option value="Phụ kiện">Phụ kiện</option>
+                    </select>
+                </div>
+                <div class="col-md-3 col-6">
+                    <select class="form-select border-0 bg-light shadow-none">
+                        <option value="">Tất cả trạng thái</option>
+                        <option value="ok">Còn hàng</option>
+                        <option value="low">Sắp hết hàng</option>
+                        <option value="out">Hết hàng</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body p-0">
+            <div id="wh-content-render"></div>
+        </div>
+
+        <div class="card-footer bg-white py-3 border-0">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="small text-muted">Tổng cộng: <span class="fw-bold">120</span> mặt hàng</div>
+                <nav id="wh-pagination"></nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="wh-detail-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow">
+            <div class="modal-header border-bottom-0 pb-0">
+                <h5 class="modal-title fw-bold text-dark">Thông tin sản phẩm</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body pt-2" id="wh-modal-body">
+            </div>
+        </div>
+    </div>
+</div>

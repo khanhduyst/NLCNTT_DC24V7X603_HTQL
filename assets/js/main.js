@@ -1,0 +1,82 @@
+const navigate = (moduleName) => {
+  const container = document.getElementById("app-container");
+
+  fetch(`modules/${moduleName}.html`)
+    .then((res) => {
+      if (!res.ok) throw new Error();
+      return res.text();
+    })
+    .then((html) => {
+      container.innerHTML = html;
+
+      if (!document.getElementById(`css-${moduleName}`)) {
+        const link = document.createElement("link");
+        link.id = `css-${moduleName}`;
+        link.rel = "stylesheet";
+        link.href = `assets/css/${moduleName}.css`;
+        document.head.appendChild(link);
+      }
+
+      const oldScript = document.getElementById(`js-${moduleName}`);
+      if (oldScript) oldScript.remove();
+
+      const script = document.createElement("script");
+      script.id = `js-${moduleName}`;
+      script.src = `assets/js/${moduleName}.js?v=${new Date().getTime()}`;
+      document.body.appendChild(script);
+
+      document.querySelectorAll("#main-sidebar .nav-link").forEach((link) => {
+        link.classList.remove("active");
+        const onclickAttr = link.getAttribute("onclick");
+        if (onclickAttr && onclickAttr.includes(moduleName)) {
+          link.classList.add("active");
+        }
+      });
+
+      if (location.hash !== `#${moduleName}`) {
+        location.hash = moduleName;
+      }
+    })
+    .catch((err) => {
+      container.innerHTML = `<div class="alert alert-danger">Lỗi tải trang hoặc trang không tồn tại!</div>`;
+    });
+};
+
+$(document).ready(() => {
+  const initHash = location.hash.replace("#", "");
+  if (initHash) {
+    navigate(initHash);
+  } else {
+    navigate("dashboard");
+  }
+
+  $("#toggle-sidebar").on("click", function (e) {
+    e.stopPropagation();
+    if (window.innerWidth <= 992) {
+      $("#main-sidebar").toggleClass("show-mobile");
+    } else {
+      $("#main-sidebar").toggleClass("collapsed");
+    }
+  });
+
+  $(document).on("click", function (e) {
+    if (
+      window.innerWidth <= 992 &&
+      !$(e.target).closest("#main-sidebar").length &&
+      !$(e.target).closest("#toggle-sidebar").length
+    ) {
+      $("#main-sidebar").removeClass("show-mobile");
+    }
+  });
+});
+
+window.onhashchange = function () {
+  const hash = location.hash.replace("#", "");
+  if (hash) {
+    const activeLink = document.querySelector(`.nav-link.active`);
+    const currentActive = activeLink ? activeLink.getAttribute("onclick") : "";
+    if (!currentActive.includes(hash)) {
+      navigate(hash);
+    }
+  }
+};

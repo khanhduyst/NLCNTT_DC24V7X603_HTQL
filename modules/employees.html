@@ -1,0 +1,55 @@
+<div class="emp-container">
+    <div class="emp-header d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h3 class="emp-title">Đội Ngũ Nhân Viên</h3>
+            <p class="emp-subtitle text-muted mb-0">Quản lý nhân sự và phân quyền hệ thống</p>
+        </div>
+        <div class="emp-actions">
+            <button class="btn btn-outline-secondary emp-btn-export me-2">
+                <i class="fas fa-file-download me-1"></i> Xuất danh sách
+            </button>
+            <button class="btn btn-primary emp-btn-add">
+                <i class="fas fa-plus me-1"></i> Thêm nhân viên
+            </button>
+        </div>
+    </div>
+
+    <div class="card emp-card border-0 shadow-sm">
+        <div class="card-header bg-white py-3">
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <span class="input-group-text border-0 bg-light"><i class="fas fa-search text-muted"></i></span>
+                        <input type="text" class="form-control border-0 bg-light shadow-none"
+                            placeholder="Tìm tên, mã NV, phòng ban...">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body p-0">
+            <div id="emp-content-render">
+            </div>
+        </div>
+
+        <div class="card-footer bg-white py-3 border-0">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="small text-muted">Đang hiển thị <span class="fw-bold">5</span> nhân sự</div>
+                <nav id="emp-pagination"></nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="emp-detail-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow">
+            <div class="modal-header border-bottom-0 pb-0">
+                <h5 class="modal-title fw-bold text-dark">Hồ sơ nhân viên</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body pt-2" id="emp-modal-body">
+            </div>
+        </div>
+    </div>
+</div>
