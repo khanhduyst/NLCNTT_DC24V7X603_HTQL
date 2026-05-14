@@ -8,7 +8,8 @@
             <button class="btn btn-outline-secondary emp-btn-export me-2">
                 <i class="fas fa-file-download me-1"></i> Xuất danh sách
             </button>
-            <button class="btn btn-primary emp-btn-add">
+            <button class="btn btn-primary emp-btn-add" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasAddEmployee">
                 <i class="fas fa-plus me-1"></i> Thêm nhân viên
             </button>
         </div>
@@ -51,5 +52,113 @@
             <div class="modal-body pt-2" id="emp-modal-body">
             </div>
         </div>
+    </div>
+</div>
+
+<!-- Offcanvas Thêm nhân viên -->
+<div class="offcanvas offcanvas-end border-0 shadow" tabindex="-1" id="offcanvasAddEmployee" style="width: 450px;">
+    <div class="offcanvas-header border-bottom py-3">
+        <h5 class="offcanvas-title fw-bold"><i class="fas fa-user-tie text-primary me-2"></i>Thêm nhân sự mới</h5>
+        <button type="button" class="btn-close shadow-none" data-bs-dismiss="offcanvas"></button>
+    </div>
+
+    <div class="offcanvas-body p-4">
+        <form id="form-add-employee" class="row g-3 needs-validation" novalidate>
+            <!-- Chọn ảnh đại diện -->
+            <div class="col-12 text-center mb-4">
+                <div class="position-relative d-inline-block">
+                    <img id="emp-avatar-preview"
+                        src="https://ui-avatars.com/api/?name=Employee&background=f1f5f9&color=64748b&size=100"
+                        class="rounded-circle border p-1" width="100">
+                    <label for="emp-upload-avatar"
+                        class="btn btn-sm btn-primary rounded-circle position-absolute bottom-0 end-0 p-1"
+                        style="width: 30px; height: 30px; cursor: pointer;">
+                        <i class="fas fa-camera"></i>
+                        <input type="file" id="emp-upload-avatar" hidden>
+                    </label>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <label class="form-label small fw-bold text-muted">Họ và Tên <span class="text-danger">*</span></label>
+                <input type="text" class="form-control border-light-subtle shadow-none"
+                    placeholder="Ví dụ: Trần Anh Tuấn" required>
+                <div class="invalid-feedback small">Vui lòng nhập họ tên nhân viên.</div>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label small fw-bold text-muted">Mã nhân viên <span
+                        class="text-danger">*</span></label>
+                <div class="input-group">
+                    <input type="text" id="emp-code" class="form-control border-light-subtle shadow-none"
+                        placeholder="NV005" required>
+                    <button class="btn btn-outline-primary shadow-none" type="button" id="btn-gen-code"
+                        title="Tạo mã ngẫu nhiên">
+                        <i class="fas fa-magic"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label small fw-bold text-muted">Số điện thoại <span
+                        class="text-danger">*</span></label>
+                <input type="text" id="emp-phone" class="form-control border-light-subtle shadow-none"
+                    placeholder="09xxx" required>
+            </div>
+
+            <div class="col-md-12">
+                <label class="form-label small fw-bold text-muted">Email công ty <span
+                        class="text-danger">*</span></label>
+                <input type="email" id="emp-email" class="form-control border-light-subtle shadow-none"
+                    placeholder="tuan.ta@company.com" required>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label small fw-bold text-muted">Phòng ban</label>
+                <select class="form-select border-light-subtle shadow-none">
+                    <option value="IT">Kỹ thuật (IT)</option>
+                    <option value="HR">Nhân sự</option>
+                    <option value="Kinh doanh">Kinh doanh</option>
+                    <option value="Kế toán">Kế toán</option>
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label small fw-bold text-muted">Chức vụ</label>
+                <select class="form-select border-light-subtle shadow-none">
+                    <option value="Nhân viên">Nhân viên</option>
+                    <option value="Chuyên viên">Chuyên viên</option>
+                    <option value="Trưởng nhóm">Trưởng nhóm</option>
+                    <option value="Quản lý">Quản lý</option>
+                </select>
+            </div>
+
+            <div class="col-md-12">
+                <label class="form-label small fw-bold text-muted">Mật khẩu đăng nhập <span
+                        class="text-danger">*</span></label>
+                <div class="input-group">
+                    <input type="text" id="emp-pass" class="form-control border-light-subtle shadow-none"
+                        placeholder="••••••••" required>
+                    <button class="btn btn-outline-primary shadow-none" type="button" id="btn-gen-pass"
+                        title="Tạo mật khẩu">
+                        <i class="fas fa-key"></i>
+                    </button>
+                    <!-- Nút ẩn/hiện pass hiện tại của em -->
+                    <span class="input-group-text bg-light border-light-subtle" style="cursor: pointer;"
+                        id="btn-toggle-pass">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                </div>
+                <small class="text-muted" style="font-size: 11px;">Mật khẩu nên có cả chữ và số để bảo mật.</small>
+            </div>
+
+            <div class="col-12 mt-5 d-grid gap-2">
+                <button type="submit" class="btn btn-primary rounded-pill py-2 fw-bold shadow-sm">
+                    <i class="fas fa-user-check me-2"></i>Xác nhận thêm nhân sự
+                </button>
+                <button type="button" class="btn btn-outline-secondary rounded-pill py-2"
+                    data-bs-dismiss="offcanvas">Hủy bỏ</button>
+            </div>
+        </form>
     </div>
 </div>

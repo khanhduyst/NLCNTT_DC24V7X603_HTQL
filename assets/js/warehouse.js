@@ -188,3 +188,69 @@
   renderWarehouse();
   window.onresize = renderWarehouse;
 })();
+
+
+(function () {
+    const whForm = document.getElementById("form-add-warehouse");
+    const whOffcanvas = document.getElementById("offcanvasAddWarehouse");
+    const btnGenSku = document.getElementById('btn-wh-gen-sku');
+    const inputSku = document.getElementById('wh-sku');
+    const btnSubmit = whForm?.querySelector('button[type="submit"]');
+
+    if (whForm && whOffcanvas) {
+        const originalText = btnSubmit.innerHTML;
+
+        // 1. Tạo SKU ngẫu nhiên cho kho
+        if (btnGenSku) {
+            btnGenSku.onclick = function() {
+                const random = Math.floor(10000 + Math.random() * 90000);
+                inputSku.value = 'WH-' + random;
+                inputSku.classList.add('is-valid');
+                setTimeout(() => inputSku.classList.remove('is-valid'), 500);
+            };
+        }
+
+        // 2. Xử lý lưu kho
+        whForm.onsubmit = function (e) {
+            e.preventDefault();
+
+            if (!whForm.checkValidity()) {
+                e.stopPropagation();
+                whForm.classList.add('was-validated');
+                return;
+            }
+
+            btnSubmit.disabled = true;
+            btnSubmit.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span> Đang nạp kho...';
+
+            setTimeout(() => {
+                btnSubmit.innerHTML = '<i class="fas fa-check me-2"></i> Đã xong!';
+                btnSubmit.classList.replace("btn-primary", "btn-success");
+
+                setTimeout(() => {
+                    // GỌI FIRE THÔNG BÁO
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Nhập kho thành công!',
+                        text: 'Sản phẩm đã được cập nhật vào danh mục Warehouse.',
+                        timer: 2000,
+                        showConfirmButton: false,
+                        position: 'center'
+                    });
+
+                    const oc = bootstrap.Offcanvas.getInstance(whOffcanvas) || new bootstrap.Offcanvas(whOffcanvas);
+                    oc.hide();
+                }, 800);
+            }, 1200);
+        };
+
+        // 3. Reset khi đóng bảng
+        whOffcanvas.addEventListener('hidden.bs.offcanvas', function () {
+            whForm.classList.remove('was-validated');
+            btnSubmit.innerHTML = originalText;
+            btnSubmit.classList.replace("btn-success", "btn-primary");
+            btnSubmit.disabled = false;
+            whForm.reset();
+        });
+    }
+})();

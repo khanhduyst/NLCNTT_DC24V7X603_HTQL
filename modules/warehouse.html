@@ -8,7 +8,8 @@
             <button class="btn btn-outline-secondary wh-btn-export me-2">
                 <i class="fas fa-file-excel me-1"></i> Xuất file
             </button>
-            <button class="btn btn-primary wh-btn-add">
+            <button class="btn btn-primary wh-btn-add" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasAddWarehouse">
                 <i class="fas fa-plus me-1"></i> Nhập hàng mới
             </button>
         </div>
@@ -67,5 +68,97 @@
             <div class="modal-body pt-2" id="wh-modal-body">
             </div>
         </div>
+    </div>
+</div>
+
+<!-- Offcanvas Thêm sản phẩm vào Warehouse -->
+<div class="offcanvas offcanvas-end border-0 shadow" tabindex="-1" id="offcanvasAddWarehouse" style="width: 450px;">
+    <div class="offcanvas-header border-bottom py-3">
+        <h5 class="offcanvas-title fw-bold text-dark">
+            <i class="fas fa-warehouse text-primary me-2"></i>Nhập kho mới
+        </h5>
+        <button type="button" class="btn-close shadow-none" data-bs-dismiss="offcanvas"></button>
+    </div>
+
+    <div class="offcanvas-body p-4">
+        <form id="form-add-warehouse" class="row g-3 needs-validation" novalidate>
+            <!-- Hình ảnh sản phẩm -->
+            <div class="col-12 text-center mb-4">
+                <div class="position-relative d-inline-block">
+                    <img id="wh-img-preview"
+                        src="https://ui-avatars.com/api/?name=WH&background=f8f9fa&color=a1acb8&size=120"
+                        class="rounded-3 border p-1" width="120">
+                    <label for="wh-upload-img"
+                        class="btn btn-sm btn-primary rounded-circle position-absolute bottom-0 end-0 p-1"
+                        style="width: 32px; height: 32px; cursor: pointer; border: 2px solid #fff;">
+                        <i class="fas fa-camera"></i>
+                        <input type="file" id="wh-upload-img" hidden>
+                    </label>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <label class="form-label small fw-bold text-muted">Tên hàng hóa <span
+                        class="text-danger">*</span></label>
+                <input type="text" class="form-control border-light-subtle shadow-none"
+                    placeholder="Ví dụ: Thùng sơn Dulux 5L" required>
+            </div>
+
+            <div class="col-md-7">
+                <label class="form-label small fw-bold text-muted">Mã SKU <span class="text-danger">*</span></label>
+                <div class="input-group">
+                    <input type="text" id="wh-sku" class="form-control border-light-subtle shadow-none"
+                        placeholder="WH-001" required>
+                    <button class="btn btn-outline-primary shadow-none" type="button" id="btn-wh-gen-sku">
+                        <i class="fas fa-barcode"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-md-5">
+                <label class="form-label small fw-bold text-muted">Đơn vị</label>
+                <select class="form-select border-light-subtle shadow-none">
+                    <option value="Cái">Cái</option>
+                    <option value="Thùng">Thùng</option>
+                    <option value="Bao">Bao</option>
+                    <option value="Kg">Kg</option>
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label small fw-bold text-muted">Số lượng <span class="text-danger">*</span></label>
+                <input type="number" class="form-control border-light-subtle shadow-none" value="1" min="1" required>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label small fw-bold text-muted">Vị trí kệ</label>
+                <input type="text" class="form-control border-light-subtle shadow-none"
+                    placeholder="A1-L2 (Kệ A1, Lầu 2)">
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label small fw-bold text-muted">Giá nhập</label>
+                <div class="input-group">
+                    <input type="number" class="form-control border-light-subtle shadow-none" placeholder="0">
+                    <span class="input-group-text bg-light border-light-subtle">đ</span>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label small fw-bold text-muted">Giá bán</label>
+                <div class="input-group">
+                    <input type="number" class="form-control border-light-subtle shadow-none" placeholder="0">
+                    <span class="input-group-text bg-light border-light-subtle">đ</span>
+                </div>
+            </div>
+
+            <div class="col-12 mt-5 d-grid gap-2">
+                <button type="submit" class="btn btn-primary rounded-pill py-2 fw-bold shadow-sm">
+                    <i class="fas fa-plus-circle me-2"></i>Xác nhận nhập kho
+                </button>
+                <button type="button" class="btn btn-outline-secondary rounded-pill py-2"
+                    data-bs-dismiss="offcanvas">Hủy bỏ</button>
+            </div>
+        </form>
     </div>
 </div>

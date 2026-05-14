@@ -169,3 +169,104 @@
   renderEmployees();
   window.onresize = renderEmployees;
 })();
+
+
+(function () {
+    const empForm = document.getElementById("form-add-employee");
+    const empOffcanvas = document.getElementById("offcanvasAddEmployee");
+    
+    // Các nút chức năng
+    const btnGenCode = document.getElementById('btn-gen-code');
+    const btnGenPass = document.getElementById('btn-gen-pass');
+    const btnToggle = document.getElementById('btn-toggle-pass');
+    
+    // Các ô Input
+    const inputCode = document.getElementById('emp-code');
+    const inputPass = document.getElementById('emp-pass');
+    const btnSubmit = empForm?.querySelector('button[type="submit"]');
+
+    if (empForm && empOffcanvas) {
+        const originalText = btnSubmit.innerHTML;
+
+        // --- 1. LOGIC RANDOM MÃ NHÂN VIÊN ---
+        if (btnGenCode) {
+            btnGenCode.onclick = function() {
+                const randomNum = Math.floor(1000 + Math.random() * 9000);
+                inputCode.value = 'NV' + randomNum;
+                inputCode.classList.add('is-valid');
+                setTimeout(() => inputCode.classList.remove('is-valid'), 500);
+            };
+        }
+
+        // --- 2. LOGIC RANDOM MẬT KHẨU ---
+        if (btnGenPass) {
+            btnGenPass.onclick = function() {
+                const chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                let pass = "";
+                for (let i = 0; i < 10; i++) {
+                    pass += chars.charAt(Math.floor(Math.random() * chars.length));
+                }
+                inputPass.value = pass;
+                inputPass.type = 'text'; // Hiện mật khẩu ra để copy
+                Swal.fire({ icon: 'info', title: 'Đã tạo mật khẩu!', timer: 1000, showConfirmButton: false, toast: true, position: 'top-end' });
+            };
+        }
+
+        // --- 3. LOGIC ẨN/HIỆN MẬT KHẨU ---
+        if (btnToggle) {
+            btnToggle.onclick = function() {
+                const icon = this.querySelector('i');
+                inputPass.type = (inputPass.type === 'password') ? 'text' : 'password';
+                icon.classList.toggle('fa-eye');
+                icon.classList.toggle('fa-eye-slash');
+            };
+        }
+
+        // --- 4. LOGIC SUBMIT FORM & THÔNG BÁO LƯU ---
+        empForm.onsubmit = function (e) {
+            e.preventDefault();
+
+            // Kiểm tra Validation
+            if (!empForm.checkValidity()) {
+                e.stopPropagation();
+                empForm.classList.add('was-validated');
+                return;
+            }
+
+            // Hiệu ứng Loading
+            btnSubmit.disabled = true;
+            btnSubmit.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span> Đang xử lý...';
+
+            setTimeout(() => {
+                // Hiệu ứng Thành công
+                btnSubmit.innerHTML = '<i class="fas fa-check me-2"></i> Lưu thành công!';
+                btnSubmit.classList.replace("btn-primary", "btn-success");
+
+                setTimeout(() => {
+                    // GỌI THÔNG BÁO FIRE (SweetAlert2)
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Thành công!',
+                        text: 'Nhân viên mới đã được thêm vào hệ thống.',
+                        timer: 2000,
+                        showConfirmButton: false
+                    });
+
+                    // Đóng Offcanvas
+                    const oc = bootstrap.Offcanvas.getInstance(empOffcanvas) || new bootstrap.Offcanvas(empOffcanvas);
+                    oc.hide();
+                }, 800);
+            }, 1200);
+        };
+
+        // --- 5. RESET MỌI THỨ KHI ĐÓNG BẢNG ---
+        empOffcanvas.addEventListener('hidden.bs.offcanvas', function () {
+            empForm.classList.remove('was-validated');
+            btnSubmit.innerHTML = originalText;
+            btnSubmit.classList.replace("btn-success", "btn-primary");
+            btnSubmit.disabled = false;
+            empForm.reset();
+            inputPass.type = 'password'; // Trả pass về dạng ẩn
+        });
+    }
+})();

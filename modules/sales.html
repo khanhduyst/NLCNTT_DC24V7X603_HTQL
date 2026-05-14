@@ -1,0 +1,78 @@
+<div class="pos-wrapper">
+    <!-- CỘT 1: CHỌN SẢN PHẨM -->
+    <div class="pos-content">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h4 class="fw-bold mb-0 text-primary">Bán hàng</h4>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0 small">
+                        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                        <li class="breadcrumb-item active">Bán hàng</li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="search-box w-50">
+                <div class="input-group input-group-merge shadow-sm">
+                    <span class="input-group-text bg-white border-0"><i class="fas fa-search text-muted"></i></span>
+                    <input type="text" id="search-product" class="form-control border-0" placeholder="Quét mã vạch hoặc tìm tên sản phẩm...">
+                </div>
+            </div>
+        </div>
+        <div class="row g-3" id="product-list-pos"></div>
+    </div>
+
+    <!-- CỘT 2: GIỎ HÀNG & THANH TOÁN -->
+    <div class="pos-billing shadow-sm">
+        <div class="p-3 border-bottom d-flex justify-content-between align-items-center bg-white">
+            <span class="fw-bold fs-5 text-dark">Đơn hàng <span class="text-primary">#WH-0524</span></span>
+            <button id="btn-clear-cart" class="btn btn-icon btn-outline-danger btn-sm border-0"><i class="fas fa-trash"></i></button>
+        </div>
+
+        <!-- THÔNG TIN KHÁCH HÀNG -->
+        <div class="customer-section">
+            <div class="mb-2 position-relative">
+                <label class="fw-bold text-primary small text-uppercase mb-1">Tìm khách hàng</label>
+                <div class="input-group input-group-merge shadow-none border rounded-3 overflow-hidden">
+                    <span class="input-group-text bg-white border-0"><i class="fas fa-search text-muted"></i></span>
+                    <input type="text" id="input-search-customer" class="form-control border-0" placeholder="Tên hoặc SĐT...">
+                    <!-- NÚT THÊM KHÁCH HÀNG MỚI -->
+                    <button class="btn btn-primary border-0 px-3" type="button" id="btn-add-new-customer">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+                <ul id="customer-results" class="list-group position-absolute w-100 shadow-lg d-none" style="z-index: 1050; top: 100%;"></ul>
+            </div>
+
+            <div id="customer-selected-display" class="d-flex align-items-center gap-3 p-2 bg-white rounded-3 border">
+                <img src="https://ui-avatars.com/api/?name=Guest&background=696cff&color=fff" class="rounded-circle" width="40" id="cus-avatar">
+                <div class="flex-grow-1">
+                    <h6 class="mb-0 fw-bold small" id="cus-name">Khách vãng lai</h6>
+                    <small class="text-muted" style="font-size: 11px;" id="cus-rank">Chưa có hạng thẻ</small>
+                </div>
+                <button class="btn btn-sm text-danger d-none" id="btn-remove-customer"><i class="fas fa-times"></i></button>
+            </div>
+        </div>
+
+        <!-- GIỎ HÀNG -->
+        <div class="flex-grow-1 overflow-auto px-3 py-2" id="cart-list"></div>
+
+        <!-- TỔNG TIỀN & GIẢM GIÁ THEO TIỀN -->
+        <div class="p-4 border-top bg-white">
+            <div class="d-flex justify-content-between mb-2">
+                <span class="text-muted small">Tạm tính</span>
+                <span class="fw-bold small" id="cart-subtotal">0đ</span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <span class="text-muted small">Giảm giá tổng (đ)</span>
+                <input type="number" id="total-discount" class="form-control form-control-sm w-50 text-end fw-bold text-danger" value="0" min="0">
+            </div>
+            <div class="d-flex justify-content-between mb-4 pt-2 border-top">
+                <h4 class="fw-bold mb-0">TỔNG:</h4>
+                <h4 class="fw-bold mb-0 text-primary" id="cart-total">0đ</h4>
+            </div>
+            <button class="btn btn-primary w-100 py-3 rounded-3 fw-bold fs-6 shadow-sm" id="btn-checkout-pos">
+                <i class="fas fa-print me-2"></i> THANH TOÁN & IN BILL
+            </button>
+        </div>
+    </div>
+</div>
