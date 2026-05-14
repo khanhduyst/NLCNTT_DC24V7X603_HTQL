@@ -133,3 +133,26 @@
     color: #1e293b;
     text-align: right;
 }
+
+/* Hiệu ứng rung khi có lỗi */
+.shake-effect {
+    animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+@keyframes shake {
+    10%, 90% { transform: translate3d(-1px, 0, 0); }
+    20%, 80% { transform: translate3d(2px, 0, 0); }
+    30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+    40%, 60% { transform: translate3d(4px, 0, 0); }
+}
+
+/* Làm đẹp ô input khi bị lỗi */
+.was-validated .form-control:invalid {
+    border-color: #ff3e1d !important;
+    background-image: none !important; /* Bỏ icon dấu chấm than mặc định của browser cho sạch */
+}
+.invalid-feedback {
+    color: #ff3e1d;
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+}

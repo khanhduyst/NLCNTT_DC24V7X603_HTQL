@@ -215,3 +215,84 @@
 
   window.onresize = renderContent;
 })();
+
+(function () {
+  const customerForm = document.getElementById("form-add-customer");
+  const offcanvasEl = document.getElementById("offcanvasAddCustomer");
+  const btnSubmit = customerForm?.querySelector('button[type="submit"]');
+
+  if (customerForm && offcanvasEl) {
+    const originalHTML = btnSubmit.innerHTML;
+
+    customerForm.onsubmit = function (e) {
+      e.preventDefault();
+
+      // Lấy giá trị các ô
+      const phone = document.getElementById("cus-phone").value;
+      const email = customerForm.querySelector('input[type="email"]').value;
+
+      // REGEX chuẩn
+      const phoneRegex = /^(0|84)(3|5|7|8|9)([0-9]{8})$/;
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      // Xóa trạng thái validate cũ để kiểm tra lại
+      customerForm.classList.remove("was-validated");
+
+      let isValid = true;
+
+      if (!phoneRegex.test(phone)) {
+        const phoneInput = document.getElementById("cus-phone");
+        phoneInput.setCustomValidity("Sai định dạng");
+        isValid = false;
+      } else {
+        document.getElementById("cus-phone").setCustomValidity("");
+      }
+
+      if (email && !emailRegex.test(email)) {
+        customerForm
+          .querySelector('input[type="email"]')
+          .setCustomValidity("Sai email");
+        isValid = false;
+      } else {
+        customerForm.querySelector('input[type="email"]').setCustomValidity("");
+      }
+
+      if (!customerForm.checkValidity() || !isValid) {
+        e.stopPropagation();
+        customerForm.classList.add("was-validated");
+        return;
+      }
+
+      btnSubmit.disabled = true;
+      btnSubmit.innerHTML =
+        '<span class="spinner-border spinner-border-sm me-2"></span> Đang xử lý...';
+
+      setTimeout(() => {
+        btnSubmit.innerHTML =
+          '<i class="fas fa-check-circle me-2"></i> Lưu thành công!';
+        btnSubmit.classList.replace("btn-primary", "btn-success");
+
+        setTimeout(() => {
+          Swal.fire({
+            icon: "success",
+            title: "Đã lưu!",
+            timer: 1500,
+            showConfirmButton: false,
+          });
+          const oc = bootstrap.Offcanvas.getInstance(offcanvasEl);
+          oc.hide();
+        }, 800);
+      }, 1000);
+    };
+
+    offcanvasEl.addEventListener("hidden.bs.offcanvas", function () {
+      customerForm.classList.remove("was-validated");
+      btnSubmit.innerHTML = originalHTML;
+      btnSubmit.classList.replace("btn-success", "btn-primary");
+      btnSubmit.disabled = false;
+      customerForm.reset();
+      // Reset lỗi thủ công cho các ô setCustomValidity
+      document.getElementById("cus-phone").setCustomValidity("");
+    });
+  }
+})();

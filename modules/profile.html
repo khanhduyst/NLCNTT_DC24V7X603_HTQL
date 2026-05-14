@@ -1,0 +1,188 @@
+<div class="profile-container">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Người dùng /</span> Hồ sơ của tôi</h4>
+
+    <div class="row">
+        <!-- Cột trái: Giữ nguyên Info cá nhân -->
+        <div class="col-xl-4 col-lg-5">
+            <!-- Card chính: Avatar & Info -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body text-center">
+                    <img class="rounded-circle mb-3 shadow-sm border p-1"
+                        src="https://ui-avatars.com/api/?name=Admin+Manager&background=4361ee&color=fff&size=100"
+                        width="100">
+                    <h4 class="fw-bold mb-1">Admin Manager</h4>
+                    <span class="badge bg-primary-subtle text-primary rounded-pill mb-4">Quản trị viên</span>
+
+                    <div class="d-flex justify-content-around border-top pt-3">
+                        <div>
+                            <h5 class="mb-0 fw-bold">1.2k</h5><small class="text-muted">Đơn hàng</small>
+                        </div>
+                        <div>
+                            <h5 class="mb-0 fw-bold">56</h5><small class="text-muted">Dự án</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card Thống kê doanh thu cá nhân -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <h6 class="fw-bold mb-3"><i class="fas fa-chart-line text-success me-2"></i>Hiệu suất tháng này</h6>
+
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-1">
+                            <small class="text-muted">Doanh thu cá nhân</small>
+                            <small class="fw-bold">450.000.000 đ</small>
+                        </div>
+                        <div class="progress" style="height: 6px;">
+                            <div class="progress-bar bg-success" style="width: 75%"></div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-1">
+                            <small class="text-muted">Tỉ lệ chốt đơn</small>
+                            <small class="fw-bold">82%</small>
+                        </div>
+                        <div class="progress" style="height: 6px;">
+                            <div class="progress-bar bg-info" style="width: 82%"></div>
+                        </div>
+                    </div>
+
+                    <div class="p-3 bg-light rounded-3 mt-4">
+                        <div class="d-flex align-items-center">
+                            <div class="badge bg-warning-subtle text-warning p-2 me-3">
+                                <i class="fas fa-trophy fs-5"></i>
+                            </div>
+                            <div>
+                                <small class="text-muted d-block">Thưởng dự kiến</small>
+                                <h5 class="fw-bold mb-0">5.200.000 đ</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card Huy hiệu/Thành tích -->
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h6 class="fw-bold mb-3">Thành tích</h6>
+                    <div class="d-flex gap-2">
+                        <span class="badge rounded-pill bg-label-secondary p-2" title="Nhân viên xuất sắc"><i
+                                class="fas fa-star text-warning"></i></span>
+                        <span class="badge rounded-pill bg-label-secondary p-2" title="Chuyên gia chốt đơn"><i
+                                class="fas fa-fire text-danger"></i></span>
+                        <span class="badge rounded-pill bg-label-secondary p-2" title="Làm việc chăm chỉ"><i
+                                class="fas fa-clock text-primary"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cột phải: Thiết kế lại Tab liền mạch với Card -->
+        <div class="col-xl-8 col-lg-7">
+            <div class="card border-0 shadow-sm">
+                <!-- Header chứa Tab -->
+                <div class="card-header p-0">
+                    <ul class="nav nav-tabs profile-tabs border-bottom-0" role="tablist">
+                        <li class="nav-item">
+                            <button class="nav-link active px-4 py-3" data-bs-toggle="tab" data-bs-target="#tab-info">
+                                <i class="fas fa-id-card me-2"></i>Thông tin cá nhân
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="nav-link px-4 py-3" data-bs-toggle="tab" data-bs-target="#tab-pass">
+                                <i class="fas fa-shield-alt me-2"></i>Bảo mật
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Nội dung các Tab -->
+                <div class="card-body pt-4">
+                    <div class="tab-content p-0 border-0 bg-transparent">
+                        <!-- Tab Thông tin -->
+                        <div class="tab-pane fade show active" id="tab-info">
+                            <h5 class="fw-bold mb-4">Chi tiết tài khoản</h5>
+                            <form id="formProfile">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label small fw-bold">Họ và Tên</label>
+                                        <input class="form-control shadow-none border-light-subtle" type="text"
+                                            value="Admin Manager">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label small fw-bold">Email</label>
+                                        <input class="form-control shadow-none border-light-subtle" type="email"
+                                            value="admin@company.com">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label small fw-bold">Số điện thoại</label>
+                                        <input class="form-control shadow-none border-light-subtle" type="text"
+                                            value="0901 234 567">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label small fw-bold">Vị trí</label>
+                                        <input class="form-control shadow-none border-light-subtle" type="text"
+                                            value="Quản lý kho tổng">
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary mt-4 rounded-pill px-4">Lưu thông
+                                    tin</button>
+                            </form>
+                        </div>
+
+                        <!-- Tab Bảo mật -->
+                        <div class="tab-pane fade" id="tab-pass">
+                            <h5 class="fw-bold mb-4">Thay đổi mật khẩu</h5>
+                            <form id="formPass">
+                                <div class="mb-3">
+                                    <label class="form-label small fw-bold">Mật khẩu hiện tại</label>
+                                    <input class="form-control shadow-none border-light-subtle" type="password"
+                                        placeholder="••••••••">
+                                </div>
+                                <div class="row g-3 mb-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label small fw-bold">Mật khẩu mới</label>
+                                        <input class="form-control shadow-none border-light-subtle" type="password"
+                                            placeholder="••••••••">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label small fw-bold">Xác nhận mật khẩu</label>
+                                        <input class="form-control shadow-none border-light-subtle" type="password"
+                                            placeholder="••••••••">
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary rounded-pill px-4">Cập nhật mật
+                                    khẩu</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lịch sử đăng nhập -->
+            <div class="card border-0 shadow-sm mt-4">
+                <div class="card-body p-0">
+                    <div class="px-4 py-3 border-bottom d-flex justify-content-between align-items-center">
+                        <h5 class="fw-bold mb-0" style="font-size: 16px;">Lịch sử đăng nhập</h5>
+                        <button class="btn btn-sm btn-light text-primary">Xem tất cả</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0 small">
+                            <tbody>
+                                <tr class="border-0">
+                                    <td class="ps-4 border-0"><i class="fab fa-chrome text-info me-2"></i> Chrome on
+                                        Windows</td>
+                                    <td class="border-0 text-muted">Sóc Trăng, VN</td>
+                                    <td class="text-end pe-4 border-0"><span
+                                            class="badge bg-success-subtle text-success">Vừa xong</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

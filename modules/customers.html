@@ -8,7 +8,8 @@
             <button class="btn btn-outline-secondary cus-btn-export me-2">
                 <i class="fas fa-file-export me-1"></i> Xuất Excel
             </button>
-            <button class="btn btn-primary cus-btn-add">
+            <button class="btn btn-primary cus-btn-add" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasAddCustomer">
                 <i class="fas fa-plus me-1"></i> Thêm khách hàng
             </button>
         </div>
@@ -53,5 +54,71 @@
             <div class="modal-body pt-2" id="modal-content-data">
             </div>
         </div>
+    </div>
+</div>
+
+<div class="offcanvas offcanvas-end border-0 shadow" tabindex="-1" id="offcanvasAddCustomer" style="width: 400px;">
+    <div class="offcanvas-header border-bottom py-3">
+        <h5 class="offcanvas-title fw-bold"><i class="fas fa-user-plus text-primary me-2"></i>Thêm khách hàng mới</h5>
+        <button type="button" class="btn-close shadow-none" data-bs-dismiss="offcanvas"></button>
+    </div>
+
+    <div class="offcanvas-body p-4">
+        <form id="form-add-customer" class="row g-3 needs-validation" novalidate>
+            <!-- Avatar -->
+            <div class="col-12 text-center mb-4">
+                <div class="position-relative d-inline-block">
+                    <img src="https://ui-avatars.com/api/?name=New+Customer&background=eef2ff&color=4361ee&size=100"
+                        class="rounded-circle border p-1" width="100">
+                    <label for="upload-avatar"
+                        class="btn btn-sm btn-primary rounded-circle position-absolute bottom-0 end-0 p-1"
+                        style="width: 30px; height: 30px; cursor: pointer;">
+                        <i class="fas fa-camera"></i>
+                        <input type="file" id="upload-avatar" hidden>
+                    </label>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <label class="form-label small fw-bold text-muted">Họ và Tên <span class="text-danger">*</span></label>
+                <input type="text" id="cus-name" class="form-control border-light-subtle shadow-none"
+                    placeholder="Ví dụ: Nguyễn Thành Nam" required>
+                <!-- Dòng báo lỗi này sẽ ẩn, chỉ hiện khi có lỗi -->
+                <div class="invalid-feedback small">Vui lòng nhập họ tên khách hàng.</div>
+            </div>
+
+            <div class="col-12">
+                <label class="form-label small fw-bold text-muted">Số điện thoại <span
+                        class="text-danger">*</span></label>
+                <input type="text" id="cus-phone" class="form-control border-light-subtle shadow-none"
+                    placeholder="Ví dụ: 0901234567" required>
+                <!-- Câu này sẽ hiện khi phoneRegex.test() trả về false -->
+                <div class="invalid-feedback small">Vui lòng nhập đúng số điện thoại (10 chữ số).</div>
+            </div>
+
+            <div class="col-12">
+                <label class="form-label small fw-bold text-muted">Email liên hệ</label>
+                <input type="email" class="form-control border-light-subtle shadow-none" placeholder="nam.nt@gmail.com">
+            </div>
+
+            <div class="col-12">
+                <label class="form-label small fw-bold text-muted">Tỉnh / Thành phố</label>
+                <input type="text" class="form-control border-light-subtle shadow-none" placeholder="Ví dụ: Sóc Trăng">
+            </div>
+
+            <div class="col-12">
+                <label class="form-label small fw-bold text-muted">Địa chỉ chi tiết</label>
+                <textarea class="form-control border-light-subtle shadow-none" rows="3"
+                    placeholder="Số nhà, tên đường, phường/xã..."></textarea>
+            </div>
+
+            <div class="col-12 mt-5 d-grid gap-2">
+                <button type="submit" class="btn btn-primary rounded-pill py-2 fw-bold shadow-sm">
+                    <i class="fas fa-save me-2"></i>Lưu thông tin khách hàng
+                </button>
+                <button type="button" class="btn btn-outline-secondary rounded-pill py-2"
+                    data-bs-dismiss="offcanvas">Hủy bỏ</button>
+            </div>
+        </form>
     </div>
 </div>

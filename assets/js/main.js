@@ -1,3 +1,34 @@
+/**
+ * Hàm thông báo kiểu "Fire" (SweetAlert2)
+ * @param {string} text - Nội dung thông báo
+ * @param {string} icon - loại: 'success', 'error', 'warning', 'info', 'question'
+ * @param {string} title - Tiêu đề
+ */
+window.showFire = function (text, icon = "success", title = "Thông báo") {
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
+
+  Toast.fire({
+    icon: icon,
+    title: title,
+    text: text,
+    // Tùy biến thêm màu sắc cho giống Sneat UI
+    customClass: {
+      popup: "shadow-lg border-0 rounded-3",
+      title: "fw-bold fs-6",
+    },
+  });
+};  
+
 const navigate = (moduleName) => {
   const container = document.getElementById("app-container");
 
