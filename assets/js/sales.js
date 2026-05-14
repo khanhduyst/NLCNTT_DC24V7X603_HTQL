@@ -39,6 +39,7 @@
   ];
 
   let cart = [];
+  let selectedCustomer = null;
 
   const inputProdSearch = document.getElementById("search-product");
   const inputCusSearch = document.getElementById("input-search-customer");
@@ -46,6 +47,7 @@
   const btnRemoveCus = document.getElementById("btn-remove-customer");
   const btnAddNewCus = document.getElementById("btn-add-new-customer");
   const totalDiscountInput = document.getElementById("total-discount");
+  const btnPay = document.getElementById("btn-checkout-pos");
 
   function renderProducts(filter = "") {
     const productList = document.getElementById("product-list-pos");
@@ -98,7 +100,6 @@
     }
   };
 
-  // GIẢM GIÁ THEO TIỀN TỪNG MÓN
   window.updateItemDiscount = (id, val) => {
     const item = cart.find((i) => i.id === id);
     if (item) {
@@ -123,7 +124,7 @@
     cartList.innerHTML = cart
       .map((item) => {
         const itemOriginalPrice = item.price * item.quantity;
-        const itemDiscountedPrice = itemOriginalPrice - item.discountAmount; // Trừ trực tiếp tiền
+        const itemDiscountedPrice = itemOriginalPrice - item.discountAmount;
         subtotal += itemDiscountedPrice;
 
         return `
@@ -155,7 +156,7 @@
 
   function calculateTotal(subtotal) {
     const discountCash = parseFloat(totalDiscountInput?.value) || 0;
-    const total = subtotal - discountCash; // Trừ trực tiếp tiền mặt
+    const total = subtotal - discountCash;
     const totalEl = document.getElementById("cart-total");
     if (totalEl)
       totalEl.innerText = (total < 0 ? 0 : total).toLocaleString() + "đ";
@@ -165,7 +166,6 @@
   if (inputProdSearch)
     inputProdSearch.oninput = (e) => renderProducts(e.target.value);
 
-  // LIVE SEARCH KHÁCH HÀNG
   if (inputCusSearch && resList) {
     inputCusSearch.oninput = function () {
       const val = this.value.toLowerCase();
@@ -198,6 +198,7 @@
   window.selectCustomer = function (id) {
     const cus = customers.find((c) => c.id === id);
     if (cus) {
+      selectedCustomer = cus;
       document.getElementById("cus-name").innerText = cus.name;
       document.getElementById("cus-rank").innerText = cus.rank;
       document.getElementById("cus-avatar").src =
@@ -210,6 +211,7 @@
 
   if (btnRemoveCus) {
     btnRemoveCus.onclick = function () {
+      selectedCustomer = null;
       document.getElementById("cus-name").innerText = "Khách vãng lai";
       document.getElementById("cus-rank").innerText = "Chưa có hạng thẻ";
       document.getElementById("cus-avatar").src =
@@ -218,8 +220,6 @@
     };
   }
 
-  // NÚT THÊM KHÁCH HÀNG MỚI (TEST)
-  // NÚT THÊM KHÁCH HÀNG MỚI (Khớp 100% form image_a3e9bb.png)
   if (btnAddNewCus) {
     btnAddNewCus.onclick = () => {
       Swal.fire({
@@ -228,16 +228,12 @@
                 <div class="text-start mt-3">
                     <label class="form-label small fw-bold">Họ và Tên <span class="text-danger">*</span></label>
                     <input id="swal-name" class="form-control mb-2" placeholder="Ví dụ: Nguyễn Thành Nam">
-                    
                     <label class="form-label small fw-bold">Số điện thoại <span class="text-danger">*</span></label>
                     <input id="swal-phone" class="form-control mb-2" placeholder="Ví dụ: 0901234567">
-                    
                     <label class="form-label small fw-bold">Email liên hệ</label>
                     <input id="swal-email" class="form-control mb-2" placeholder="nam.nt@gmail.com">
-                    
                     <label class="form-label small fw-bold">Tỉnh / Thành phố</label>
                     <input id="swal-city" class="form-control mb-2" placeholder="Ví dụ: Sóc Trăng">
-                    
                     <label class="form-label small fw-bold">Địa chỉ chi tiết</label>
                     <textarea id="swal-address" class="form-control" rows="2" placeholder="Số nhà, tên đường, phường/xã..."></textarea>
                 </div>
@@ -272,8 +268,6 @@
         if (result.isConfirmed) {
           const newCus = result.value;
           const newId = customers.length + 1;
-
-          // Thêm vào mảng tạm để test (Sau này chỗ này sẽ là gọi API lưu DB)
           customers.push({
             id: newId,
             name: newCus.name,
@@ -283,10 +277,7 @@
             city: newCus.city,
             address: newCus.address,
           });
-
-          // Tự động chọn khách hàng vừa tạo
           selectCustomer(newId);
-
           Swal.fire({
             icon: "success",
             title: "Đã thêm khách hàng!",
@@ -299,24 +290,42 @@
     };
   }
 
-  const btnPay = document.getElementById("btn-checkout-pos");
   if (btnPay) {
     btnPay.onclick = () => {
       if (cart.length === 0) {
         Swal.fire("Lỗi!", "Giỏ hàng trống!", "error");
         return;
       }
+
+      const paymentMethod =
+        document.querySelector('input[name="payment-method"]:checked')?.value ||
+        "cash";
+
+      if (paymentMethod === "debt" && !selectedCustomer) {
+        Swal.fire(
+          "Cảnh báo!",
+          "Khách vãng lai không được phép ghi nợ. Vui lòng chọn khách hàng cụ thể!",
+          "warning",
+        );
+        return;
+      }
+
       Swal.fire({
         title: "Xác nhận thanh toán?",
-        text: `Tổng thu: ${document.getElementById("cart-total").innerText}`,
+        text: `Hình thức: ${paymentMethod === "cash" ? "Tiền mặt" : "Ghi nợ"} - Tổng thu: ${document.getElementById("cart-total").innerText}`,
         icon: "question",
         showCancelButton: true,
         confirmButtonText: "Hoàn tất",
       }).then((result) => {
         if (result.isConfirmed) {
+          if (paymentMethod === "debt") {
+            console.log("Xử lý đẩy công nợ cho:", selectedCustomer.name);
+          }
           Swal.fire("Xong!", "Đơn hàng đã được lưu.", "success");
           cart = [];
+          selectedCustomer = null;
           renderCart();
+          if (btnRemoveCus) btnRemoveCus.click();
         }
       });
     };

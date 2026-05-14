@@ -43,13 +43,56 @@
 </div>
 
 <div class="modal fade" id="emp-detail-modal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content border-0 shadow">
-            <div class="modal-header border-bottom-0 pb-0">
-                <h5 class="modal-title fw-bold text-dark">Hồ sơ nhân viên</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body pt-2" id="emp-modal-body">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg">
+            <div class="modal-content border-0 shadow-lg">
+                <div class="modal-header border-bottom-0 pb-0">
+                    <h5 class="modal-title fw-bold text-dark">Hồ sơ & Phân quyền</h5>
+                    <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal"></button>
+                </div>
+            
+                <div class="modal-body pt-2">
+                    <!-- THANH TAB ĐIỀU HƯỚNG -->
+                    <ul class="nav nav-pills nav-fill mb-4 bg-light p-1 rounded-pill" id="empModalTab" role="tablist">
+                        <li class="nav-item">
+                            <button class="nav-link active rounded-pill fw-bold small py-2" data-bs-toggle="tab"
+                                data-bs-target="#tab-info">
+                                <i class="fas fa-id-card me-1"></i> Hồ sơ
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="nav-link rounded-pill fw-bold small py-2" data-bs-toggle="tab"
+                                data-bs-target="#tab-permission">
+                                <i class="fas fa-user-shield me-1"></i> Quyền hạn
+                            </button>
+                        </li>
+                    </ul>
+            
+                    <div class="tab-content">
+                        <!-- TAB 1: THÔNG TIN HỒ SƠ -->
+                        <div class="tab-pane fade show active" id="tab-info">
+                            <div id="emp-modal-body">
+                                <!-- JS sẽ nạp hồ sơ vào đây -->
+                            </div>
+                        </div>
+            
+                        <!-- TAB 2: DANH SÁCH PHÂN QUYỀN -->
+                        <div class="tab-pane fade" id="tab-permission">
+                            <div class="table-responsive" style="max-height: 350px;">
+                                <table class="table table-sm table-borderless align-middle">
+                                    <tbody id="emp-modal-permission-list">
+                                        <!-- JS sẽ nạp switch quyền vào đây -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="d-grid mt-3 pt-3 border-top">
+                                <button class="btn btn-primary rounded-pill fw-bold" onclick="savePermissionsFromModal()">
+                                    <i class="fas fa-save me-2"></i> Lưu thay đổi quyền
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
