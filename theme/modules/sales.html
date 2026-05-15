@@ -4,12 +4,6 @@
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
                 <h4 class="fw-bold mb-0 text-primary">Bán hàng</h4>
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb mb-0 small">
-                        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
-                        <li class="breadcrumb-item active">Bán hàng</li>
-                    </ol>
-                </nav>
             </div>
             <div class="search-box w-50">
                 <div class="input-group input-group-merge shadow-sm">
@@ -69,6 +63,21 @@
             <div class="d-flex justify-content-between mb-4 pt-2 border-top">
                 <h4 class="fw-bold mb-0">TỔNG:</h4>
                 <h4 class="fw-bold mb-0 text-primary" id="cart-total">0đ</h4>
+            </div>
+            <!-- CHỌN HÌNH THỨC THANH TOÁN -->
+            <div class="mb-3 p-2 bg-light rounded-3 border">
+                <label class="fw-bold text-muted small text-uppercase mb-2 d-block text-center">Hình thức thanh toán</label>
+                <div class="d-flex gap-2">
+                    <input type="radio" class="btn-check" name="payment-method" id="pay-cash" value="cash" checked>
+                    <label class="btn btn-outline-primary btn-sm flex-grow-1" for="pay-cash">
+                        <i class="fas fa-money-bill-wave me-1"></i> Tiền mặt
+                    </label>
+            
+                    <input type="radio" class="btn-check" name="payment-method" id="pay-debt" value="debt">
+                    <label class="btn btn-outline-warning btn-sm flex-grow-1" for="pay-debt" id="label-pay-debt">
+                        <i class="fas fa-file-invoice me-1"></i> Ghi nợ
+                    </label>
+                </div>
             </div>
             <button class="btn btn-primary w-100 py-3 rounded-3 fw-bold fs-6 shadow-sm" id="btn-checkout-pos">
                 <i class="fas fa-print me-2"></i> THANH TOÁN & IN BILL

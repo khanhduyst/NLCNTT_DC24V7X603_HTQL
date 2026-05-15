@@ -1,16 +1,3 @@
-(function() {
-    const user = localStorage.getItem('erp_user');
-    if (!user) {
-        // Nếu chưa đăng nhập, đá về trang login ngay lập tức
-        window.location.replace('login.html');
-    }
-})();
-/**
- * Hàm thông báo kiểu "Fire" (SweetAlert2)
- * @param {string} text - Nội dung thông báo
- * @param {string} icon - loại: 'success', 'error', 'warning', 'info', 'question'
- * @param {string} title - Tiêu đề
- */
 window.showFire = function (text, icon = "success", title = "Thông báo") {
   const Toast = Swal.mixin({
     toast: true,
@@ -18,17 +5,12 @@ window.showFire = function (text, icon = "success", title = "Thông báo") {
     showConfirmButton: false,
     timer: 3000,
     timerProgressBar: true,
-    didOpen: (toast) => {
-      toast.addEventListener("mouseenter", Swal.stopTimer);
-      toast.addEventListener("mouseleave", Swal.resumeTimer);
-    },
   });
 
   Toast.fire({
     icon: icon,
     title: title,
     text: text,
-    // Tùy biến thêm màu sắc cho giống Sneat UI
     customClass: {
       popup: "shadow-lg border-0 rounded-3",
       title: "fw-bold fs-6",
@@ -38,8 +20,9 @@ window.showFire = function (text, icon = "success", title = "Thông báo") {
 
 const navigate = (moduleName) => {
   const container = document.getElementById("app-container");
+  container.innerHTML = `<div class="text-center py-5"><div class="spinner-border text-primary"></div></div>`;
 
-  fetch(`modules/${moduleName}.html`)
+  fetch(`modules/${moduleName}.php`)
     .then((res) => {
       if (!res.ok) throw new Error();
       return res.text();
@@ -76,17 +59,13 @@ const navigate = (moduleName) => {
       }
     })
     .catch((err) => {
-      container.innerHTML = `<div class="alert alert-danger">Lỗi tải trang hoặc trang không tồn tại!</div>`;
+      container.innerHTML = `<div class="alert alert-danger mt-3">Lỗi tải module: ${moduleName}</div>`;
     });
 };
 
 $(document).ready(() => {
   const initHash = location.hash.replace("#", "");
-  if (initHash) {
-    navigate(initHash);
-  } else {
-    navigate("dashboard");
-  }
+  navigate(initHash || "dashboard");
 
   $("#toggle-sidebar").on("click", function (e) {
     e.stopPropagation();
@@ -111,10 +90,6 @@ $(document).ready(() => {
 window.onhashchange = function () {
   const hash = location.hash.replace("#", "");
   if (hash) {
-    const activeLink = document.querySelector(`.nav-link.active`);
-    const currentActive = activeLink ? activeLink.getAttribute("onclick") : "";
-    if (!currentActive.includes(hash)) {
-      navigate(hash);
-    }
+    navigate(hash);
   }
 };

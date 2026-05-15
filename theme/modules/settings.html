@@ -1,0 +1,51 @@
+<div class="set-container">
+    <div class="mb-4">
+        <h4 class="fw-bold text-dark mb-1">Cài Đặt Hệ Thống</h4>
+        <p class="text-muted small">Quản lý tài khoản và phân quyền nhân viên</p>
+    </div>
+
+    <div class="row g-4">
+        <!-- Danh sách nhân viên -->
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white py-3 border-0">
+                    <h6 class="fw-bold mb-0">Nhân viên</h6>
+                </div>
+                <div class="list-group list-group-flush" id="set-user-list">
+                    <!-- Data nhân viên nạp vào đây -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Bảng phân quyền chi tiết -->
+        <div class="col-md-8">
+            <div class="card border-0 shadow-sm d-none" id="set-permission-card">
+                <div class="card-header bg-white py-3 border-0 d-flex justify-content-between align-items-center">
+                    <h6 class="fw-bold mb-0 text-primary">Quyền hạn của: <span id="set-active-user-name">...</span></h6>
+                    <button class="btn btn-primary btn-sm rounded-pill px-3" onclick="savePermissions()">Lưu thay
+                        đổi</button>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-borderless align-middle">
+                            <thead class="bg-light">
+                                <tr>
+                                    <th class="small fw-bold">Module</th>
+                                    <th class="small fw-bold text-center">Cho phép truy cập</th>
+                                </tr>
+                            </thead>
+                            <tbody id="set-permission-list">
+                                <!-- Checkbox quyền hạn nạp vào đây -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center py-5 text-muted" id="set-no-user-selected">
+                <i class="fas fa-user-shield fs-1 mb-3 opacity-25"></i>
+                <p>Chọn một nhân viên để thiết lập quyền hạn</p>
+            </div>
+        </div>
+    </div>
+</div>

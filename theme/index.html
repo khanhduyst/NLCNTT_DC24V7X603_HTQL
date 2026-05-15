@@ -26,11 +26,11 @@
                     </a>
                 </li>
                 <li class="nav-item mb-2">
-                    <a href="javascript:void(0)" class="nav-link text-white active" onclick="navigate('sales')">
-                        <i class="menu-icon tf-icons fas fa-shopping-cart"></i> Bán hàng
+                    <a href="javascript:void(0)" class="nav-link text-white" onclick="navigate('analytics')">
+                        <i class="menu-icon tf-icons fas fa-chart-bar"></i> Báo cáo & Thống kê
                     </a>
                 </li>
-               
+
                 <li class="nav-item mb-2">
                     <a href="javascript:void(0)" class="nav-link text-white" onclick="navigate('customers')">
                         <i class="fas fa-user-friends me-2"></i> Khách hàng
@@ -84,6 +84,12 @@
                 </form>
 
                 <div class="ms-auto d-flex align-items-center">
+                    <button class="btn btn-primary rounded-pill px-3 me-3 d-none d-md-flex align-items-center shadow-sm"
+                        onclick="navigate('sales')"
+                        style="background: linear-gradient(45deg, #4361ee, #4cc9f0); border: none;">
+                        <i class="fas fa-cash-register me-2"></i>
+                        <span class="fw-bold small">POS Bán hàng</span>
+                    </button>
                     <div class="dropdown me-3">
                         <a href="#" class="position-relative text-secondary" data-bs-toggle="dropdown"
                             data-bs-display="static">
