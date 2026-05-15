@@ -1,2 +1,3 @@
 # NLCNTT_DC24V7X603_HTQL
 # 11/05/2026
+# Cau Hinh Trong Zalo
